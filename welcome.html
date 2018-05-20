@@ -1,0 +1,60 @@
+<head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+
+<body id="root"></body>
+
+<script type="text/babel"> //must identify script type as babel
+    const rootElement = document.getElementById('root');
+//Non-react method
+    // const element = document.createElement('div');
+    // element.textContent = 'Hello, world!';
+    // element.className = 'container';
+    // rootElement.appendChild(element);
+
+//React method (without JSX)
+    //create element API takes in object type, and then an object of props (.e.g, className and children)
+    // const element = React.createElement('div', {
+    //     className: 'container',
+    //     children: ["hello.", "goodbye.", "i'm gone forever now"],
+    //     }
+    // );
+// React method (with JSX)
+    const welcome = "I can't do that, Dave";
+    const myClassName = 'container';
+    const props = {
+        className: 'container',
+        children: 'Hello World'
+    }
+    //using squiggly brackets incapsulates javascript within the JSX
+    const element = (
+        <div {...props}/> //can override attributes provided by props object by declaring thise attributes inline
+    )
+    ReactDOM.render(element, rootElement);
+</script>
+<script type="text/babel">
+
+    const Message = (props) => <div>{props.msg}</div>
+    const element2 = (
+        <div className="container">
+            <Message msg="Good job" />
+            <Message msg='Bad job' />
+        </div>
+    )
+    ReactDOM.render(element2, rootElement); //second call overrides first one
+</script>
+
+<script type="text/babel">
+
+    const Number = props => <div>{prompt("Adam, is your phone number?")}</div>
+    const element3 = (
+        <div className="container">
+            <Number />
+        </div>
+    )
+    ReactDOM.render(element3, rootElement); //second call overrides first one
+</script>
+
+
