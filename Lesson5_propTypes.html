@@ -2,32 +2,104 @@
 <head>
     <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.6.1/prop-types.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
 </head>
+
+
+<style>
+    #root{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: white;
+        background: url('images/darkwood.jpg') no-repeat center;
+        background-size: cover;
+        font-family: 'Roboto Slab', serif;
+    }
+    .title{
+        font-size: calc(35px + 1vw);
+    }
+    .mainDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+    }
+    button{
+        border-radius: 50px;
+        background: transparent;
+        color: white;
+        padding: 20px;
+        min-width: 100px;
+        font-family: 'Roboto Slab', serif;
+        font-size: 30px
+    }
+    label{
+        font-size: 35px;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    button:focus {
+        outline: none;
+    }
+</style>
 
 <body id="root"></body>
 
 
 <script type="text/babel">
-    class SayHello extends React.Compoent{
-        static propTypes = {
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-        }
+
+class StopWatch extends React.Component{
+    state = {lapse: 0, running: false};
+    handleRunClick = () => {
+        this.setState(state => {
+            if(state.running){
+                clearInterval(this.timer);
+            }else{
+                const startTime = Date.now() - this.state.lapse;
+                this.timer = setInterval(() => {
+                    this.setState({
+                        lapse: Date.now() - startTime,
+                    })
+                })
+            }
+            return {running: !state.running};
+        })
+    }
+
+    handleClearClick = () => {
+        storedValues.push("1");
+        clearInterval(this.timer);
+        this.setState({lapse: 0, running: false})
+    }
+
     render(){
-        const {firstName, lastName} = this.props
-        return(
-                <div>
-                    Hello {firstName} {lastName}!
-                </div>
+        const {lapse, running} = this.state;
+        return (  
+            <div className="mainDiv">
+                <div className='title'>React Stopwatch</div>
+                <label>{lapse}ms</label>
+                <button onClick={this.handleRunClick}>{running ? '||' : '>'}</button>
+                <button onClick={this.handleClearClick}>Clear</button>
+            </div> 
         )
     }
 }
 
-    ReactDOM.render(
-        <SayHello firstName={true} />,
-        document.getElementById('root')
-    )
+let storedValues = [];
+
+const element = (
+    <StopWatch />
+)
+
+ReactDOM.render(
+    element,
+    document.getElementById('root')
+)
 
 </script>
+
