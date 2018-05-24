@@ -1,9 +1,13 @@
 
 <head>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <!-- <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="icon" href="images/stopwatch.png" type="image/gif" sizes="16x16">
+    <title>React Stopwatch</title>
 </head>
 
 
@@ -83,7 +87,7 @@ class StopWatch extends React.Component{
             <div className="mainDiv">
                 <div className='title'>React Stopwatch</div>
                 <label>{lapse}ms</label>
-                <button onClick={this.handleRunClick}>{running ? '||' : '>'}</button>
+                <button onClick={this.handleRunClick}>{running ? 'Stop' : 'Start'}</button>
                 <button onClick={this.handleClearClick}>Clear</button>
             </div> 
         )
