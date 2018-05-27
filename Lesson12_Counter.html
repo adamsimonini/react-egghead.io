@@ -50,54 +50,27 @@
 
 <body id="root"></body>
 
-
 <script type="text/babel">
+class Counter extends React.Component{
+    state = {count: 0}
 
-class StopWatch extends React.Component{
-    state = {lapse: 0, running: false};
-    handleRunClick = () => {
-        this.setState(state => {
-            if(state.running){
-                clearInterval(this.timer);
-            }else{
-                const startTime = Date.now() - this.state.lapse;
-                this.timer = setInterval(() => {
-                    this.setState({
-                        lapse: Date.now() - startTime,
-                    })
-                })
-            }
-            return {running: !state.running};
-        })
-    }
-
-    handleClearClick = () => {
-        storedValues.push("1");
-        clearInterval(this.timer);
-        this.setState({lapse: 0, running: false})
+    handleClick = () => {
+        this.setState(({count}) => ({
+            count: count + 1,
+        }))
     }
 
     render(){
-        const {lapse, running} = this.state;
         return (  
-            <div className="mainDiv">
-                <div className='title'>React Stopwatch</div>
-                <label>{lapse}ms</label>
-                <button onClick={this.handleRunClick}>{running ? '||' : '>'}</button>
-                <button onClick={this.handleClearClick}>Clear</button>
-            </div> 
+            <button onClick={this.handleClick}>
+                {this.state.count}
+            </button>
         )
     }
 }
 
-let storedValues = [];
-
-const element = (
-    <StopWatch />
-)
-
 ReactDOM.render(
-    element,
+    <Counter />,
     document.getElementById('root')
 )
 
