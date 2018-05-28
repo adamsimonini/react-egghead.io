@@ -1,0 +1,138 @@
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.4.1/vanilla-tilt.min.js"></script>
+</head>
+
+<style>
+    body{
+        height: 100vh;
+
+    }
+    #root{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: black;
+        background: url('images/desktop.jpg') no-repeat;
+        background-size: 100% 100vh;
+        font-family: 'Roboto Slab', serif;
+    }
+    .title{
+        font-size: calc(35px + 1vw);
+    }
+    .mainDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+    }
+    form{
+        max-width: 70%;
+    }
+    input{
+        max-width: 70%;
+        align-self: center;
+    }
+    button{
+        align-self: center;
+        text-align: center;
+        border-radius: 10px;
+        color: black;
+        padding: 10px;
+        min-width: 100px;
+        max-width: 70%;
+        font-family: 'Roboto Slab', serif;
+        font-size: 30px */
+    }
+    label{
+        font-size: 20px;
+    }
+    h1{
+        font-size: 30px;
+    }
+    form{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: center;
+        min-height: 40vh;
+    }
+</style>
+
+<body id="root"></body>
+
+<script type="text/babel">
+class NameForm extends React.Component{ 
+    state = {error: null};
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const value = event.target.elements.username.value;
+        const error = this.props.getErrorMessage(value);
+
+        if(error){
+            alert(`error: ${error}`);
+        }else{
+            alert(`success: ${value}`);
+        }
+    }
+
+    handleChange = e => {
+        const {value} = e.target;
+        this.setState({
+            error: this.props.getErrorMessage(value)
+        })
+    }
+
+    componentDidMount(){
+        this.setState({
+            error: this.props.getErrorMessage(''),
+        })
+    }
+
+    render (){
+        const {error} = this.state;
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <h1>React Front-End Validation</h1>
+                <label>
+                    Name: 
+                </label>
+                {error ? <div style={{color: 'red'}}>{error}</div> : null}
+                    <input 
+                        type="text"
+                        onChange={this.handleChange}
+                        name="username"
+                        ref={node => (this.inputNode = node)}
+                        />
+                    <button 
+                        disabled={Boolean(error)}
+                        type="submit">Submit</button>
+            </form>
+        )
+    }
+}
+
+ReactDOM.render(
+    <NameForm 
+        getErrorMessage={value => {
+            if(value.length < 3){
+                return "Name must be at least 3 characters long";
+            }
+            if (!value.includes('s')){
+                return 'Name must include "s"';
+            }
+            return null;
+        }}
+    />,
+    document.getElementById('root')
+)
+
+</script>
+

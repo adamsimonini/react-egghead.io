@@ -1,0 +1,78 @@
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+</head>
+
+
+<style>
+    #root{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: white;
+        background: url('images/darkwood.jpg') no-repeat center;
+        background-size: cover;
+        font-family: 'Roboto Slab', serif;
+    }
+    .title{
+        font-size: calc(35px + 1vw);
+    }
+    .mainDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+    }
+    button{
+        border-radius: 50px;
+        background: transparent;
+        color: white;
+        padding: 20px;
+        min-width: 100px;
+        font-family: 'Roboto Slab', serif;
+        font-size: 30px
+    }
+    label{
+        font-size: 35px;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    button:focus {
+        outline: none;
+    }
+</style>
+
+<body id="root"></body>
+
+<script type="text/babel">
+class Counter extends React.Component{
+    state = {count: 0}
+
+    handleClick = () => {
+        this.setState(({count}) => ({
+            count: count + 1,
+        }))
+    }
+
+    render(){
+        return (  
+            <button onClick={this.handleClick}>
+                {this.state.count}
+            </button>
+        )
+    }
+}
+
+ReactDOM.render(
+    <Counter />,
+    document.getElementById('root')
+)
+
+</script>
+

@@ -1,0 +1,199 @@
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.4.1/vanilla-tilt.min.js"></script>
+</head>
+
+<style>
+    input, textarea, select{
+        min-width: 190px;
+    }
+    body{
+        height: 100vh;
+
+    }
+    #root{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: black;
+        background: url('images/desktop.jpg') no-repeat;
+        background-size: 100% 100vh;
+        font-family: 'Roboto Slab', serif;
+    }
+    .title{
+        font-size: calc(35px + 1vw);
+    }
+    .mainDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+    }
+    form{
+        max-width: 70%;
+    }
+    input{
+        max-width: 70%;
+        align-self: center;
+    }
+    button{
+        align-self: center;
+        text-align: center;
+        border-radius: 10px;
+        color: black;
+        padding: 10px;
+        min-width: 100px;
+        max-width: 70%;
+        font-family: 'Roboto Slab', serif;
+        font-size: 30px */
+    }
+    label{
+        font-size: 20px;
+    }
+    h1{
+        font-size: 30px;
+    }
+    form{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: center;
+        min-height: 40vh;
+    }
+</style>
+
+<body id="root"></body>
+
+<script type="text/babel">
+class FancyForm extends React.Component{ 
+    static availableOptions = [
+        'apple',
+        'grape',
+        'cherry',
+        'orange',
+        'pear',
+        'peach',
+    ]
+
+    state={multiline: '', commaSeparated: '', multiSelect: []}
+
+    handleCommaSeparatedChange = e => {
+        e.preventDefault();
+        const {value} = e.target;
+        const allVals = value
+            .split(',')
+            .map(v => v.trim())
+            .filter(Boolean)
+        this.setState({
+            commaSeparated: value,
+            multiline: allVals
+                .join('\n'),
+            multiSelect: allVals.filter( v => 
+                FancyForm.availableOptions.includes(v),
+            ),
+        })
+    }
+
+    handleMultilineChange = e => {
+        e.preventDefault();
+        const {value} = e.target;
+        const allVals = value
+            .split('\n')
+            .map(v => v.trim())
+            .filter(Boolean)
+        this.setState({
+            multiline: value,
+            commaSeparated: allVals
+                .join(','),
+            multiSelect: allVals.filter( v => 
+                FancyForm.availableOptions.includes(v),
+            ),
+        })
+    }
+
+    handleMultiSelectChange = e => {
+        e.preventDefault();
+        const allVals = Array.from(
+            e.target.selectedOptions
+            ).map(o => o.value)
+        this.setState({
+            multiSelect: allVals,
+            multiline: allVals.join('\n'),
+            commaSeparated: allVals.join(','),
+        })
+    }
+
+    render (){
+        const {commaSeparated, multiline, multiSelect} = this.state
+        return (
+            <form>
+                <div>
+                    <label>CSVs:
+                    <br />
+                    <input
+                        type='text'
+                        value={commaSeparated}
+                        onChange={
+                            this.handleCommaSeparatedChange
+                        }
+                    />
+                    </label> 
+                </div>
+                <div>
+                    <label>Multiline Values:
+                        <br />
+                        <textarea
+                            style={{ minHeight: 100 }}
+                            type='text'
+                            value= {multiline}
+                            onChange={
+                                this.handleMultilineChange
+                            }
+                        >
+                        </textarea> 
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Multiselect Values:
+                        <br />
+                        <select
+                            multiple
+                            value={multiSelect}
+                            size={FancyForm.availableOptions.length}
+                            onChange={
+                                this.handleMultiSelectChange
+                            }
+                        >
+                            {FancyForm.availableOptions.map(
+                                optionValue => (
+                                    <option
+                                        key={optionValue}
+                                        value={optionValue}
+                                    >
+                                        {optionValue}
+                                    </option>
+                                )
+                            )}
+                        </select>
+                    </label> 
+                </div>
+            </form>
+        )
+    }
+}
+
+ReactDOM.render(
+    <FancyForm />,
+    document.getElementById('root')
+)
+
+</script>
+
