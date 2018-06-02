@@ -1,0 +1,98 @@
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+</head>
+
+<style>
+    input, textarea, select{
+        min-width: 190px;
+    }
+    body{
+        height: 100vh;
+
+    }
+    #root{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        color: black;
+        background: url('images/desktop.jpg') no-repeat;
+        background-size: 100% 100vh;
+        font-family: 'Roboto Slab', serif;
+    }
+    .title{
+        font-size: calc(35px + 1vw);
+    }
+    .mainDiv{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+    }
+    form{
+        max-width: 70%;
+    }
+    input{
+        max-width: 70%;
+        align-self: center;
+    }
+    button{
+        align-self: center;
+        text-align: center;
+        border-radius: 10px;
+        color: black;
+        padding: 10px;
+        min-width: 100px;
+        max-width: 70%;
+        font-family: 'Roboto Slab', serif;
+        font-size: 30px */
+    }
+    label{
+        font-size: 20px;
+    }
+    h1{
+        font-size: 30px;
+    }
+    form{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-content: center;
+        min-height: 40vh;
+    }
+</style>
+
+<body id="root"></body>
+
+<script type="text/babel">
+class App extends React.Component{ 
+    static allItems = [
+        {id: 'a', value:'apple'},
+        {id: 'o', value:'orange'},
+        {id: 'g', value:'grape'},
+        {id: 'p', value:'pear'},
+    ]
+
+    render(){
+        return (
+            <div>
+                {App.allItems.map(item =>
+                    <div key={item.id}>{item.value}</div>
+                )}
+            </div>
+        )
+    }
+}
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+)
+
+</script>
+
