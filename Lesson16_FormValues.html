@@ -1,10 +1,10 @@
 
 <head>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.4.1/vanilla-tilt.min.js"></script>
+    <link rel="icon" href="images/forms.png" type="image/gif" sizes="16x16">
 </head>
 
 <style>
@@ -20,9 +20,9 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        color: black;
-        background: url('images/desktop.jpg') no-repeat;
-        background-size: 100% 100vh;
+        color: white;
+        background: url('images/balloon.jpg') no-repeat;
+        background-size: auto;
         font-family: 'Roboto Slab', serif;
     }
     .title{
@@ -66,6 +66,10 @@
         justify-content: space-around;
         align-content: center;
         min-height: 40vh;
+        background: rgba(0,0,0,0.7);
+        padding: 20px;
+        height: 60vh;
+        border-radius: 20px;
     }
 </style>
 
@@ -134,6 +138,8 @@ class FancyForm extends React.Component{
         const {commaSeparated, multiline, multiSelect} = this.state
         return (
             <form>
+                <h1>Intelligent Form Fields</h1>
+                <h3>Enter, or select, one of the fruits below, and the other fields follow suit</h3>
                 <div>
                     <label>CSVs:
                     <br />
@@ -196,4 +202,3 @@ ReactDOM.render(
 )
 
 </script>
-

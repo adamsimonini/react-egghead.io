@@ -1,10 +1,10 @@
 
 <head>
-    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.4.1/vanilla-tilt.min.js"></script>
+    <link rel="icon" href="images/checked.png" type="image/gif" sizes="16x16">
 </head>
 
 <style>
@@ -125,8 +125,8 @@ ReactDOM.render(
             if(value.length < 3){
                 return "Name must be at least 3 characters long";
             }
-            if (!value.includes('s')){
-                return 'Name must include "s"';
+            if (!value.includes('p')){
+                return 'Name must include "p"';
             }
             return null;
         }}
